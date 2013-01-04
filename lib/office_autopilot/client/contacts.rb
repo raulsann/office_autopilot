@@ -16,6 +16,12 @@ module OfficeAutopilot
         parse_contacts_xml(response)[0]
       end
 
+      def contacts_update(options)
+        xml = xml_for_contact(options)
+        response = request(:post, CONTACTS_ENDPOINT, :body => {'reqType' => 'update', 'return_id' => '1', 'data' => xml}.merge(auth))
+        parse_contacts_xml(response)[0]
+      end
+
       def contacts_pull_tag
         response = request(:post, CONTACTS_ENDPOINT, :body => {'reqType' => 'pull_tag'})
         parse_xml(response, "tag")
