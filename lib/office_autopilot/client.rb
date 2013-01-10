@@ -41,7 +41,7 @@ module OfficeAutopilot
       xml = Nokogiri::XML(response)
 
       if xml.at_css('result').content =~ /failure/i
-        raise OfficeAutopilot::XmlError if xml.at_css('result error').content =~ /Invalid XML/i
+        raise OfficeAutopilot::XmlError if xml.at_css('result error').try(:content) =~ /Invalid XML/i
       end
 
       response
