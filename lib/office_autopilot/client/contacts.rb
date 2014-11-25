@@ -4,7 +4,11 @@ module OfficeAutopilot
 
       CONTACTS_ENDPOINT = '/cdata.php'
 
-      def contacts_search(options, page)
+      def contacts_search(options)
+        contacts_search_by_page(options, 0)
+      end
+      
+      def contacts_search_by_page(options, page)
         xml = xml_for_search(options, page)
         response = request(:post, CONTACTS_ENDPOINT, :body => {'reqType' => 'search', 'data' => xml})
         parse_contacts_xml(response)
