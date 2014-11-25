@@ -4,8 +4,8 @@ module OfficeAutopilot
 
       CONTACTS_ENDPOINT = '/cdata.php'
 
-      def contacts_search(options)
-        xml = xml_for_search(options)
+      def contacts_search(options, page)
+        xml = xml_for_search(options, page)
         response = request(:post, CONTACTS_ENDPOINT, :body => {'reqType' => 'search', 'data' => xml})
         parse_contacts_xml(response)
       end
@@ -135,13 +135,13 @@ module OfficeAutopilot
         xml
       end
 
-      def xml_for_search(options)
+      def xml_for_search(options, page)
         if options.is_a?(Hash)
           options = [options]
         end
 
         xml = Builder::XmlMarkup.new
-        xml.search do
+        xml.search("page"=>page) do
           options.each do |option|
             xml.equation do
               xml.field option[:field]
