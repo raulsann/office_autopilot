@@ -5,7 +5,7 @@ module OfficeAutopilot
       CONTACTS_ENDPOINT = '/cdata.php'
 
       def contacts_search(options)
-        contacts_search_by_page(options, 0)
+        contacts_search_by_page(options, 1)
       end
       
       def contacts_search_by_page(options, page)
