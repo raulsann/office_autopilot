@@ -145,7 +145,7 @@ module OfficeAutopilot
         end
 
         xml = Builder::XmlMarkup.new
-        xml.search do
+        xml.search("page"=>page) do
           options.each do |option|
             xml.equation do
               xml.field option[:field]
